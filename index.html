@@ -66,45 +66,10 @@
     <script src="<ディレクトリ>/jquery.history.js"></script>
 
     <script>
-        "use strict";
-            //ポップアップ非表示の判定
-            let popAppend = false;
-
-            //履歴の追加
-            let hash = location.hash;
-            if(hash != '#back') {
-                history.pushState(null,null,location.href);
-                history.replaceState(null,null,'#back');
-            }
-
-            //設定したハッシュタグが消えたら実行
-            window.addEventListener('popstate',(e) => {
-                if(location.hash != "#back" && popAppend === false) {
-                $('.popup-area').fadeIn();
-                $('body').append($("<div>", {class: 'cover-eml'}));
-                popAppend = true;
-
-                if(popAppend) {
-                    $('body').on('click', '.cover-eml' , function() {
-                        deleteElm();
-                        popAppend = false;
-                    });
-                }
-            }
+	history.replaceState(null, null, null);
+	window.addEventListener('popstate', function(e) {
+            alert('ブラウザバックを検知しました。');
         });
-
-        //バナー削除
-        $('body,.close-btn').on('click', '.close-btn', function() {
-            deleteElm();
-            popAppend = false;
-        });
-        function deleteElm() {
-            $('.cover-eml').fadeOut();
-            $('.cover-eml').remove();
-            $('.popup-area').fadeOut();
-        }
-
-            
     </script>
 </body>
 </html>
